@@ -1,0 +1,461 @@
+/* =========================================================
+   BLOOM GARDEN — self-contained stylesheet
+   Prefix: every class starts with "bloom-" to avoid collisions
+   with host page styles. Safe to drop into any existing site.
+   Mobile-first: base rules target ~390px, min-width queries
+   scale up for tablet / desktop.
+   ========================================================= */
+
+/* Fallback positioning context, kept at zero specificity so a host page's
+   own rules on this same element (e.g. a page-transition system that needs
+   position:absolute here) always win without any !important fights. */
+:where(#bloom-garden) {
+  position: relative;
+}
+
+#bloom-garden {
+  --bg-cream: #FBF3E7;
+  --bg-cream-deep: #F3E6D0;
+  --blush: #F6C7D1;
+  --blush-deep: #EFA6B8;
+  --lavender: #DCCFF0;
+  --lavender-deep: #C3AEE0;
+  --sage: #BFD3B4;
+  --sage-deep: #9FBB90;
+  --cream-white: #FFFDF9;
+  --ink: #5B4E4A;
+  --ink-soft: #8A7B74;
+  --gold: #EFCB8B;
+
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(246, 199, 209, 0.35), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 85% 85%, rgba(220, 207, 240, 0.35), transparent 60%),
+    linear-gradient(160deg, var(--bg-cream), var(--bg-cream-deep));
+  font-family: 'Quicksand', 'Nunito', sans-serif;
+  color: var(--ink);
+  isolation: isolate;
+}
+
+#bloom-garden * {
+  box-sizing: border-box;
+}
+
+#bloom-garden .bloom-drift {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#bloom-garden .bloom-petal-drift {
+  position: absolute;
+  top: -8%;
+  font-size: 18px;
+  opacity: 0.55;
+  animation: bloom-fall linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(150, 100, 90, 0.15));
+}
+
+@keyframes bloom-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.55; }
+  100% { transform: translateY(115vh) rotate(230deg); opacity: 0; }
+}
+
+/* ---------- shared panel look ---------- */
+#bloom-garden .bloom-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(180deg, var(--cream-white), #FFF9F1);
+  border-radius: 32px;
+  padding: 40px 26px 34px;
+  text-align: center;
+  box-shadow:
+    0 30px 60px -20px rgba(120, 90, 70, 0.28),
+    0 2px 0 rgba(255, 255, 255, 0.6) inset;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+#bloom-garden .bloom-emoji {
+  font-size: clamp(2.4rem, 9vw, 3.2rem);
+  line-height: 1;
+  margin-bottom: 14px;
+  display: inline-block;
+  animation: bloom-bob 3.4s ease-in-out infinite;
+}
+
+@keyframes bloom-bob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+
+#bloom-garden .bloom-title {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  color: #B0466B;
+  margin: 0 0 10px;
+  line-height: 1.15;
+}
+
+#bloom-garden .bloom-subtitle {
+  font-size: clamp(0.92rem, 3.6vw, 1.02rem);
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0 auto 26px;
+  max-width: 34ch;
+}
+
+/* ---------- buttons ---------- */
+#bloom-garden .bloom-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  padding: 15px 34px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blush-deep), #C96D8B);
+  box-shadow: 0 12px 24px -8px rgba(196, 96, 130, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#bloom-garden .bloom-btn:active {
+  transform: scale(0.96);
+}
+
+#bloom-garden .bloom-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+  transform: none;
+}
+
+#bloom-garden .bloom-btn-selfie {
+  background: linear-gradient(135deg, var(--lavender-deep), #A992D6);
+  box-shadow: 0 12px 24px -8px rgba(150, 120, 200, 0.55);
+}
+
+#bloom-garden .bloom-btn-save {
+  background: linear-gradient(135deg, #E39BB0, #C96D8B);
+  box-shadow: 0 12px 24px -8px rgba(196, 96, 130, 0.55);
+}
+
+#bloom-garden .bloom-btn-whatsapp {
+  background: linear-gradient(135deg, #3FCB6B, #22A657);
+  box-shadow: 0 12px 24px -8px rgba(34, 166, 87, 0.55);
+}
+
+#bloom-garden .bloom-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+#bloom-garden .bloom-continue-link {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#bloom-garden .bloom-share-note {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+#bloom-garden .bloom-error {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: #A5495F;
+  background: rgba(239, 166, 184, 0.18);
+  border: 1px solid rgba(239, 166, 184, 0.5);
+  border-radius: 14px;
+  padding: 10px 14px;
+  line-height: 1.5;
+}
+
+#bloom-garden .bloom-error[hidden] {
+  display: none;
+}
+
+/* ---------- stage (camera + garden) ---------- */
+#bloom-garden .bloom-stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+#bloom-garden .bloom-camera-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #0B0B10;
+  box-shadow:
+    0 24px 50px -18px rgba(0, 0, 0, 0.55),
+    0 0 0 6px rgba(255, 255, 255, 0.12);
+}
+
+#bloom-garden .bloom-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror preview for a natural "looking in a mirror" feel */
+  filter: saturate(0.85) brightness(0.72) contrast(1.05);
+}
+
+#bloom-garden .bloom-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#bloom-garden .bloom-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 70px 18px rgba(0, 0, 0, 0.55);
+  border-radius: inherit;
+}
+
+/* live "Bloom: 0.xx" HUD readout, top-left of the camera view */
+#bloom-garden .bloom-readout {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: #FFD9E6;
+  background: rgba(20, 10, 20, 0.45);
+  border: 1px solid rgba(255, 130, 170, 0.35);
+  padding: 5px 12px;
+  border-radius: 999px;
+  text-shadow: 0 0 8px rgba(255, 90, 140, 0.7);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+#bloom-garden .bloom-readout.bloom-readout-visible {
+  opacity: 1;
+}
+
+/* small circular capture button, pinned top-right of the camera view */
+#bloom-garden .bloom-capture-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background: rgba(20, 10, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  transition: transform 0.15s ease, background 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#bloom-garden .bloom-capture-btn:active {
+  transform: scale(0.9);
+  background: rgba(239, 166, 184, 0.55);
+}
+
+#bloom-garden .bloom-capture-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+#bloom-garden .bloom-capture-flash.bloom-flash-active {
+  animation: bloom-flash 0.35s ease-out;
+}
+
+@keyframes bloom-flash {
+  0% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+/* "strike a pose" countdown, shown right before the final photo is taken */
+#bloom-garden .bloom-pose-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(10, 6, 16, 0.4);
+  text-align: center;
+  padding: 24px;
+}
+
+#bloom-garden .bloom-pose-text {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 6.5vw, 2.1rem);
+  color: #FFE3EE;
+  text-shadow: 0 0 14px rgba(255, 120, 170, 0.85);
+  max-width: 22ch;
+}
+
+#bloom-garden .bloom-pose-count {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 14vw, 4rem);
+  color: #fff;
+  text-shadow: 0 0 22px rgba(255, 255, 255, 0.85);
+  animation: bloom-pose-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes bloom-pose-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #bloom-garden .bloom-pose-count {
+    animation: none !important;
+  }
+}
+
+#bloom-garden .bloom-hint {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  text-align: center;
+  min-height: 1.4em;
+  padding: 0 12px;
+  transition: opacity 0.3s ease;
+}
+
+#bloom-garden .bloom-counter {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #7C8B6F;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(159, 187, 144, 0.4);
+  padding: 6px 18px;
+  border-radius: 999px;
+}
+
+/* ---------- completion screen ---------- */
+#bloom-garden .bloom-complete .bloom-emoji {
+  animation: bloom-sparkle-spin 4s ease-in-out infinite;
+}
+
+@keyframes bloom-sparkle-spin {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50% { transform: rotate(8deg) scale(1.08); }
+}
+
+/* ---------- generic visibility helper ---------- */
+#bloom-garden [hidden] {
+  display: none !important;
+}
+
+/* ---------- small phones ---------- */
+@media (max-width: 359px) {
+  #bloom-garden .bloom-panel {
+    padding: 32px 18px 28px;
+    border-radius: 26px;
+  }
+
+  #bloom-garden .bloom-btn {
+    padding: 13px 26px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- tablet and up ---------- */
+@media (min-width: 640px) {
+  #bloom-garden {
+    padding: 60px 24px;
+  }
+
+  #bloom-garden .bloom-panel {
+    padding: 52px 48px 44px;
+  }
+
+  #bloom-garden .bloom-camera-wrap {
+    aspect-ratio: 4 / 3;
+    max-width: 560px;
+  }
+
+  #bloom-garden .bloom-stage {
+    max-width: 560px;
+  }
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 1024px) {
+  #bloom-garden .bloom-camera-wrap {
+    aspect-ratio: 16 / 10;
+    max-width: 720px;
+  }
+
+  #bloom-garden .bloom-stage {
+    max-width: 720px;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #bloom-garden .bloom-emoji,
+  #bloom-garden .bloom-petal-drift,
+  #bloom-garden .bloom-complete .bloom-emoji {
+    animation: none !important;
+  }
+}
